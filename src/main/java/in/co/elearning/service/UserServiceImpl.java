@@ -177,17 +177,16 @@ public class UserServiceImpl implements UserServiceInt {
 	@Override
 	public long register(UserDTO dto) throws DuplicateRecordException {
 		long pk = dao.add(dto);
-		/*
-		 * HashMap<String, String> map = new HashMap<String, String>();
-		 * map.put("firstName", dto.getFirstName()); map.put("lastName",
-		 * dto.getLastName()); map.put("login", dto.getLogin()); map.put("password",
-		 * dto.getPassword()); String message = EmailBuilder.getUserRegistration(map);
-		 * MimeMessage msg = mailSender.createMimeMessage(); try { MimeMessageHelper
-		 * helper = new MimeMessageHelper(msg); helper.setTo(dto.getEmailId());
-		 * helper.setSubject("Online Food Delivery Registration Successfully!!!");
-		 * helper.setText(message, true); mailSender.send(msg); } catch
-		 * (MessagingException e) { e.printStackTrace(); }
-		 */
+		
+		 HashMap<String, String> map = new HashMap<String, String>();
+		 map.put("firstName", dto.getFirstName()); map.put("lastName",
+		 dto.getLastName()); map.put("login", dto.getLogin()); map.put("password",
+		 dto.getPassword()); String message = EmailBuilder.getUserRegistration(map);
+		 MimeMessage msg = mailSender.createMimeMessage(); try { MimeMessageHelper
+		 helper = new MimeMessageHelper(msg); helper.setTo(dto.getEmailId());
+		 helper.setSubject("Online Food Delivery Registration Successfully!!!");
+		 helper.setText(message, true); mailSender.send(msg); } catch
+		 (MessagingException e) { e.printStackTrace(); }
 		return pk;
 	}
 }

@@ -35,13 +35,7 @@ public class CourseDAOImpl implements CourseDAOInt {
 		return pk;
 	}
 
-	@Override
-	public void delete(CourseDTO dto) {
-		log.info("CourseDAOImpl Delete method Start");
-		entityManager.remove(entityManager.contains(dto) ? dto : entityManager.merge(dto));
-		log.info("CourseDAOImpl Delete method End");
 
-	}
 
 	@Override
 	public CourseDTO findBypk(long pk) {

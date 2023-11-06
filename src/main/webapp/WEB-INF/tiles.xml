@@ -128,5 +128,27 @@
         <put-attribute name="body" value="/WEB-INF/bodyfragments/_changePassword.jsp" />  
     </definition>
     
+     <definition name="assignment" extends="base.definition">  
+        <put-attribute name="title" value="Assignment" />  
+        <put-attribute name="body" value="/WEB-INF/bodyfragments/assignmentview.jsp" />  
+    </definition>
+    
+       <definition name="assignmentlist" extends="base.definition">  
+        <put-attribute name="title" value="Assignment List" />  
+        <put-attribute name="body" value="/WEB-INF/bodyfragments/assignmentlistview.jsp" />  
+    </definition>
+    
+          <!-- FAQ View  -->
+    <definition name="faq" extends="base.definition">  
+        <put-attribute name="title" value="FAQ" />  
+        <put-attribute name="body" value="/WEB-INF/bodyfragments/faqview.jsp" />  
+    </definition> 
+    
+      <!-- FAQ List View  -->
+    <definition name="faqlist" extends="base.definition">  
+        <put-attribute name="title" value="FAQ List" />  
+        <put-attribute name="body" value="/WEB-INF/bodyfragments/faqlistview.jsp" />  
+    </definition> 
+    
    
 </tiles-definitions> 

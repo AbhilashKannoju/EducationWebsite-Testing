@@ -228,19 +228,7 @@ public class LoginCtl extends BaseCtl {
 		if (bindingResult.hasErrors()) {
 			return "changePassword";
 		}
-		if (form.getNewPassword().equalsIgnoreCase(form.getConfirmPassword())) {
-
-			UserDTO dto = (UserDTO) session.getAttribute("user");
-			dto = service.findBypk(dto.getId());
-
-			if (service.changePassword(dto.getId(), form.getOldPassword(), form.getNewPassword())) {
-				model.addAttribute("success", "Password changed Successfully");
-			} else {
-				model.addAttribute("error", "Old Passowors Does not Matched");
-			}
-		} else {
-			model.addAttribute("error", "New Password and confirm password does not matched");
-		}
+		
 		return "changePassword";
 	}
 

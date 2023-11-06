@@ -97,9 +97,8 @@ public class ContentCtl extends BaseCtl {
 					return "content";
 				}
 				ContentDTO bean = (ContentDTO) form.getDTO();
-				bean.setVideo(file.getBytes());
-				bean.setMaterial(file1.getBytes());
-				CourseDTO cDto=courseService.findBypk(DataUtility.getLong(String.valueOf(session.getAttribute("cId"))));
+				
+			CourseDTO cDto=courseService.findBypk(DataUtility.getLong(String.valueOf(session.getAttribute("cId"))));
 				bean.setCourse(cDto);
 				if (bean.getId() > 0) {
 					service.update(bean);
@@ -168,18 +167,7 @@ public class ContentCtl extends BaseCtl {
 			model.addAttribute("error", "Record not found");
 		}
 
-		int listsize = list.size();
-		int total = totallist.size();
-		int pageNoPageSize = pageNo * pageSize;
-
-		form.setPageNo(pageNo);
-		form.setPageSize(pageSize);
-		model.addAttribute("pageNo", pageNo);
-		model.addAttribute("pageSize", pageSize);
-		model.addAttribute("listsize", listsize);
-		model.addAttribute("total", total);
-		model.addAttribute("pagenosize", pageNoPageSize);
-		model.addAttribute("form", form);
+		
 		return "contentList";
 	}
 

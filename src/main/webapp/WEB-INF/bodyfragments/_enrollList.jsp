@@ -6,8 +6,7 @@
 
 <c:url var="content" value="/home/login/student/myCourse/content?cId=" />
 <br>
-<sf:form method="post"
-		action="${pageContext.request.contextPath}/home/login/student/enroll"
+<sf:form 
 		modelAttribute="form">
 <div class="container"> 
 <nav aria-label="breadcrumb">

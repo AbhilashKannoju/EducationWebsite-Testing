@@ -77,7 +77,12 @@
 							<li class="nav-item linkSize"><a class="nav-link link-light"
 								href="<c:url value="/home/login/helpDesk"/>">HelpDesk</a></li>
 								<li class="nav-item linkSize"><a class="nav-link link-light"
-								href="<c:url value="/home/login/helpDesk/search"/>">View Queries</a></li>		
+								href="<c:url value="/home/login/helpDesk/search"/>">View Queries</a></li>	
+								
+							<li class="nav-item linkSize"><a class="nav-link link-light"
+								href="${pageContext.request.contextPath}/assignmentlist">View Assignment</a></li>	
+							<li class="nav-item linkSize"><a class="nav-link link-light"
+								href="${pageContext.request.contextPath}/faqlist">View FAQ</a></li>	
 
 						</c:if>
 
@@ -85,11 +90,21 @@
 							<li class="nav-item linkSize"><a class="nav-link link-light"
 								href="<c:url value="/home/login/dashboard"/>">Dashboard</a></li>
 							<li class="nav-item linkSize"><a class="nav-link link-light"
-								href="<c:url value="/home/login/dashboard/course/search"/>">View Course</a></li>
+								href="<c:url value="/home/login/dashboard/course/searches"/>">View Course</a></li>
 							<li class="nav-item linkSize"><a class="nav-link link-light"
 								href="<c:url value="/home/login/dashboard/course"/>">Add Course</a></li>
 							<li class="nav-item linkSize"><a class="nav-link link-light"
-								href="<c:url value="/home/login/helpDesk/search"/>">View Queries</a></li>	
+								href="<c:url value="/home/login/helpDesk/search"/>">View Queries</a></li>
+								
+							<li class="nav-item linkSize"><a class="nav-link link-light"
+								href="${pageContext.request.contextPath}/assignment">Add Assignment</a></li>
+							<li class="nav-item linkSize"><a class="nav-link link-light"
+								href="${pageContext.request.contextPath}/assignmentlist">View Assignment</a></li>
+								
+							<li class="nav-item linkSize"><a class="nav-link link-light"
+								href="${pageContext.request.contextPath}/faq">Add FAQ</a></li>
+							<li class="nav-item linkSize"><a class="nav-link link-light"
+								href="${pageContext.request.contextPath}/faqlist">View FAQ</a></li>			
 
 						</c:if>
 
