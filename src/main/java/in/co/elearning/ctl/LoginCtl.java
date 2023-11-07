@@ -34,9 +34,9 @@ public class LoginCtl extends BaseCtl {
 
 	private Logger log = Logger.getLogger(LoginCtl.class.getName());
 
-	protected static final String OP_SIGNIN = "SignIn";
-	protected static final String OP_SIGNUP = "SignUp";
-	protected static final String OP_LOGOUT = "Logout";
+	protected  String OP_SIGNIN = "SignIn";
+	protected String OP_SIGNUP = "SignUp";
+	protected  String OP_LOGOUT = "Logout";
 
 	@Autowired
 	private UserServiceInt service;

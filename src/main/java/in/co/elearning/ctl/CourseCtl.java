@@ -118,6 +118,16 @@ public class CourseCtl extends BaseCtl {
 		pageSize = (pageSize < 1) ? 10 : pageSize;
 
 		if (OP_DELETE.equals(operation)) {
+			
+
+			form.setPageNo(pageNo);
+			form.setPageSize(pageSize);
+			model.addAttribute("pageNo", pageNo);
+			model.addAttribute("pageSize", pageSize);
+			model.addAttribute("listsize", listsize);
+			model.addAttribute("total", total);
+			model.addAttribute("pagenosize", pageNoPageSize);
+			model.addAttribute("form", form);
 			pageNo = 1;
 			if (form.getIds() != null) {
 				for (long id : form.getIds()) {

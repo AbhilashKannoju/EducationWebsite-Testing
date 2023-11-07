@@ -58,12 +58,14 @@ public class HelpDeskCtl extends BaseCtl {
 	public String submit(@Valid @ModelAttribute("form") HelpDeskForm form, BindingResult bindingResult,
 			HttpSession session, Model model,HttpServletRequest request) {
 
-		if (OP_RESET.equalsIgnoreCase(form.getOperation())) {
+		String res = "reset";
+		String sav = "save";
+		if (res.equalsIgnoreCase(form.getOperation())) {
 			return "redirect:/home/login/helpDesk";
 		}
 		
 		try {
-			if (OP_SAVE.equalsIgnoreCase(form.getOperation())) {
+			if (sav.equalsIgnoreCase(form.getOperation())) {
 
 				if (bindingResult.hasErrors()) {
 					return "helpDesk";

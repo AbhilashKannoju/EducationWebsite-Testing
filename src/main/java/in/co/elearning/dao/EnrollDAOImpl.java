@@ -35,13 +35,7 @@ public class EnrollDAOImpl implements EnrollDAOInt {
 		return pk;
 	}
 
-	@Override
-	public void delete(EnrollDTO dto) {
-		log.info("EnrollDAOImpl Delete method Start");
-		entityManager.remove(entityManager.contains(dto) ? dto : entityManager.merge(dto));
-		log.info("EnrollDAOImpl Delete method End");
-
-	}
+	
 
 	@Override
 	public EnrollDTO findBypk(long pk) {

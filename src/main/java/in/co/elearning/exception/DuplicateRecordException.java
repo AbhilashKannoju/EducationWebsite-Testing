@@ -1,9 +1,7 @@
 package in.co.elearning.exception;
 
 
-public class DuplicateRecordException  extends Exception
+public class DuplicateRecordException 
 {
-	public DuplicateRecordException(String msg) {
-		super(msg);
-	}
+	
 }

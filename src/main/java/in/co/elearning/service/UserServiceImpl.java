@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserServiceInt {
 	public long add(UserDTO dto) throws DuplicateRecordException {
 		log.info("UserServiceImpl Add method start");
 		UserDTO existDTO = dao.findByLogin(dto.getLogin());
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		if (existDTO != null)
 			throw new DuplicateRecordException("Login Id Already Exist");
 		long pk = dao.add(dto);

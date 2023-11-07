@@ -74,6 +74,7 @@ public class EnrollServiceImpl implements EnrollServiceInt {
 
 	@Override
 	@Transactional
+	@Autowired
 	public List<EnrollDTO> list() {
 		log.info("EnrollServiceImpl list method start");
 		List<EnrollDTO> list = dao.list();
@@ -83,6 +84,7 @@ public class EnrollServiceImpl implements EnrollServiceInt {
 
 	@Override
 	@Transactional
+	@Autowired
 	public List<EnrollDTO> list(int pageNo, int pageSize) {
 		log.info("EnrollServiceImpl list method start");
 		List<EnrollDTO> list = dao.list(pageNo, pageSize);
@@ -110,7 +112,7 @@ public class EnrollServiceImpl implements EnrollServiceInt {
 
 	@Override
 	@Transactional
-	public EnrollDTO findByCourseIdAndUserId(long courseId, long userId) {
+	public EnrollDTO findidatcourses(long courseId, long userId) {
 		// TODO Auto-generated method stub
 		return dao.findByCourseIdAndUserId(courseId, userId);
 	}

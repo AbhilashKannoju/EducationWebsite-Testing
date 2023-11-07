@@ -20,6 +20,13 @@ public class ForgetPasswordForm extends BaseForm {
 	public BaseDTO getDTO() {
 		UserDTO dto = new UserDTO();
 		dto.setLogin(login);
+		bean.setId(id);
+		bean.setTitle(title);
+		bean.setDescription(description);
+		bean.setCreatedBy(createdBy);
+		bean.setModifiedBy(modifiedBy);
+		bean.setCreatedDatetime(createdDateTime);
+		bean.setModifiedDatetime(modifiedDateTime);
 		return dto;
 	}
 
