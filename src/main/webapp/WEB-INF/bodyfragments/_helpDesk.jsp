@@ -30,38 +30,38 @@
 						<label for="inputEmail4" class="form-label">Problem</label>
 						<sf:input path="${status.expression}"
 							placeholder="Enter Problem" class="form-control" />
-						<font color="red" style="font-size: 20px"><sf:errors
+						<font color="red" style="font-size: 13px"><sf:errors
 								path="${status.expression}" /></font>
 					</s:bind>
 				</div>
-				
-				
+
+
 				<div class="col-md-6">
 					<s:bind path="description">
 						<label for="inputEmail4" class="form-label">Description</label>
 						<sf:textarea path="${status.expression}" placeholder="Enter Description"
-							class="form-control" rows="6" cols="6" />
-						<font color="red" style="font-size: 20px"><sf:errors
+							class="form-control" rows="5" cols="4" />
+						<font color="red" style="font-size: 13px"><sf:errors
 								path="${status.expression}" /></font>
 					</s:bind>
 				</div>
-				
+
 				<c:if test="${sessionScope.user.roleId == 3}">
 				<div class="col-md-6">
 					<s:bind path="comment">
 						<label for="inputEmail4" class="form-label">Comment</label>
 						<sf:textarea path="${status.expression}" placeholder="Enter Comment"
 							class="form-control" rows="5" cols="4" />
-						<font color="red" style="font-size: 20px"><sf:errors
+						<font color="red" style="font-size: 13px"><sf:errors
 								path="${status.expression}" /></font>
 					</s:bind>
 				</div>
 			</c:if>
-				
+
 				<br>
 				<div class="col-12">
 					<input type="submit" name="operation"
-						class="btn btn-primary pull-left" value="Save"> 
+						class="btn btn-primary pull-right" value="Save">
 				</div>
 			</div>
 		</div>
