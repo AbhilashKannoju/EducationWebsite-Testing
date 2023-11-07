@@ -30,7 +30,7 @@ public class HelpDeskDAOImpl implements HelpDeskDAOInt {
 	public long add(HelpDeskDTO dto) {
 		log.info("HelpDeskDAOImpl Add method Start");
 		Session session = entityManager.unwrap(Session.class);
-		;
+
 		log.info("HelpDeskDAOImpl Add method End");
 		return pk;
 	}
