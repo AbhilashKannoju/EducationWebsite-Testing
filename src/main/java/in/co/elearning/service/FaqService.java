@@ -36,7 +36,14 @@ public class FaqService {
 		return dto;
 	}
 
-	
+	public void update(FaqDTO dto) throws DuplicateRecordException {
+
+		FaqDTO existDTO = dao.findByQuestion(dto.getQuestion());
+		if (existDTO != null && dto.getId() != existDTO.getId())
+			throw new DuplicateRecordException("Name Already Exist");
+		dao.saveAndFlush(dto);
+
+	}
 
 	public List<FaqDTO> list() {
 
@@ -44,5 +51,5 @@ public class FaqService {
 
 		return list;
 	}
-	
+
 }
