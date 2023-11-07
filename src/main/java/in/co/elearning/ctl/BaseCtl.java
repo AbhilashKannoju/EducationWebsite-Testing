@@ -1,9 +1,6 @@
 package in.co.elearning.ctl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponseWrapper;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpFilter;
 
 import in.co.elearning.dto.BaseDTO;
 import in.co.elearning.dto.UserDTO;
@@ -16,9 +13,9 @@ public class BaseCtl {
 	protected static final String OP_SUBMIT = "Submit";
 	protected static final String OP_NEW="New";
 	protected static final String OP_DELETE="Delete";
-	
+
 	protected static final String OP_COMPARE="Compare";
-	
+
 	protected static final String OP_UPDATE="Update";
 	protected static final String OP_CANCEL="Cancel";
 	protected static final String OP_ERROR="Error";
@@ -29,10 +26,10 @@ public class BaseCtl {
 	protected static final String OP_GET="Get";
 	protected static final String OP_RESET="Reset";
 	protected static final String OP_PAY = "Pay";
-	
-	
+
+
 	protected BaseDTO populateDTO(BaseDTO dto, HttpServletRequest request) {
-	
+
 		String createdBy = request.getParameter("createdBy");
 		String modifiedBy = null;
 
@@ -65,8 +62,8 @@ public class BaseCtl {
 		}
 
 		dto.setModifiedDatetime(DataUtility.getCurrentTimestamp());
-		
+
 		return dto;
 	}
-	
+
 }
