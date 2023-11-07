@@ -48,7 +48,8 @@
 						<label for="inputEmail4" class="form-label">Video</label>
 						<input type="file" name="${status.expression}"
 							placeholder="Enter Video" class="form-control" required="required"/>
-
+						<font color="red" style="font-size: 13px"><sf:errors
+								path="${status.expression}" /></font>
 					</s:bind>
 				</div>
 				
