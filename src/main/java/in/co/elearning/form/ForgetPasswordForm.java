@@ -15,24 +15,17 @@ public class ForgetPasswordForm extends BaseForm {
 
 	@NotEmpty(message = "Login Id is required")
 	private String login;
-	
+
 	@Override
 	public BaseDTO getDTO() {
 		UserDTO dto = new UserDTO();
 		dto.setLogin(login);
-		bean.setId(id);
-		bean.setTitle(title);
-		bean.setDescription(description);
-		bean.setCreatedBy(createdBy);
-		bean.setModifiedBy(modifiedBy);
-		bean.setCreatedDatetime(createdDateTime);
-		bean.setModifiedDatetime(modifiedDateTime);
 		return dto;
 	}
 
 	@Override
 	public void populate(BaseDTO bDto) {
-		
+
 	}
 
 }
