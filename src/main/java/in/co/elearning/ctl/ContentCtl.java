@@ -40,35 +40,35 @@ public class ContentCtl extends BaseCtl {
 
 	@Autowired
 	private ContentServiceInt service;
-	
+
 	@Autowired
 	private CourseServiceInt courseService;
-	
+
 	@ModelAttribute
 	public void preload(Model model) {
 	}
 
 	@GetMapping("/home/login/dashboard/course/content")
 	public String display(@RequestParam(required = false) Long id, Long cId, @ModelAttribute("form") ContentForm form,
-			HttpSession session, Model model) {
+						  HttpSession session, Model model) {
 		if (form.getId() > 0) {
 			ContentDTO bean = service.findBypk(id);
 			form.populate(bean);
 		}
 		if(DataUtility.getLong(String.valueOf(id))==0) {
-		cId=DataUtility.getLong(String.valueOf(cId));
-		if(cId > 0) {
-			session.setAttribute("cId",cId);
-		}else {
-			return "redirect:/home/login/dashboard/course/search";
-		}
+			cId=DataUtility.getLong(String.valueOf(cId));
+			if(cId > 0) {
+				session.setAttribute("cId",cId);
+			}else {
+				return "redirect:/home/login/dashboard/course/search";
+			}
 		}
 		return "content";
 	}
-	
+
 	@GetMapping("/home/login/student/myCourse/content/view")
 	public String showContent(@RequestParam(required = false) Long id, Long cId, @ModelAttribute("form") ContentForm form,
-			HttpSession session, Model model) {
+							  HttpSession session, Model model) {
 		if (form.getId() > 0) {
 			ContentDTO bean = service.findBypk(id);
 			form.populate(bean);
@@ -84,12 +84,12 @@ public class ContentCtl extends BaseCtl {
 
 	@PostMapping("/home/login/dashboard/course/content")
 	public String submit(@RequestParam("video") MultipartFile file, @RequestParam("material") MultipartFile file1,@Valid @ModelAttribute("form") ContentForm form, BindingResult bindingResult,
-			HttpSession session, Model model) {
+						 HttpSession session, Model model) {
 
 		if (OP_RESET.equalsIgnoreCase(form.getOperation())) {
 			return "redirect:/home/login/dashboard/course/content";
 		}
-		
+
 		try {
 			if (OP_SAVE.equalsIgnoreCase(form.getOperation())) {
 
@@ -97,8 +97,9 @@ public class ContentCtl extends BaseCtl {
 					return "content";
 				}
 				ContentDTO bean = (ContentDTO) form.getDTO();
-				
-			CourseDTO cDto=courseService.findBypk(DataUtility.getLong(String.valueOf(session.getAttribute("cId"))));
+				bean.setVideo(file.getBytes());
+				bean.setMaterial(file1.getBytes());
+				CourseDTO cDto=courseService.findBypk(DataUtility.getLong(String.valueOf(session.getAttribute("cId"))));
 				bean.setCourse(cDto);
 				if (bean.getId() > 0) {
 					service.update(bean);
@@ -120,7 +121,7 @@ public class ContentCtl extends BaseCtl {
 
 	@RequestMapping(value = "/home/login/dashboard/course/content/search", method = { RequestMethod.GET, RequestMethod.POST })
 	public String searchList(@ModelAttribute("form") ContentForm form,
-			@RequestParam(required = false) String operation, Long cId, HttpSession session, Model model) {
+							 @RequestParam(required = false) String operation, Long cId, HttpSession session, Model model) {
 
 		if (OP_RESET.equalsIgnoreCase(operation)) {
 			return "redirect:/home/login/dashboard/course/content/search";
@@ -157,7 +158,7 @@ public class ContentCtl extends BaseCtl {
 
 		UserDTO uDto = (UserDTO) session.getAttribute("user");
 		cId =DataUtility.getLong(String.valueOf(cId));
-		
+
 
 		List<ContentDTO> list = service.search(dto, pageNo, pageSize);
 		List<ContentDTO> totallist = service.search(dto);
@@ -167,13 +168,24 @@ public class ContentCtl extends BaseCtl {
 			model.addAttribute("error", "Record not found");
 		}
 
-		
+		int listsize = list.size();
+		int total = totallist.size();
+		int pageNoPageSize = pageNo * pageSize;
+
+		form.setPageNo(pageNo);
+		form.setPageSize(pageSize);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("listsize", listsize);
+		model.addAttribute("total", total);
+		model.addAttribute("pagenosize", pageNoPageSize);
+		model.addAttribute("form", form);
 		return "contentList";
 	}
 
 	@RequestMapping(value = "/home/login/student/myCourse/content", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myCourseContent(@ModelAttribute("form") ContentForm form,
-			@RequestParam(required = false) String operation, Long cId, HttpSession session, Model model) {
+								  @RequestParam(required = false) String operation, Long cId, HttpSession session, Model model) {
 
 		if (OP_RESET.equalsIgnoreCase(operation)) {
 			return "redirect:/ctl/myCourse/content";
@@ -183,7 +195,7 @@ public class ContentCtl extends BaseCtl {
 
 		cId =DataUtility.getLong(String.valueOf(cId));
 		model.addAttribute("cDto",courseService.findBypk(cId));
-		
+
 		List<ContentDTO> list = service.search(dto);
 		List<ContentDTO> totallist = service.search(dto);
 		model.addAttribute("list", list);
@@ -199,24 +211,24 @@ public class ContentCtl extends BaseCtl {
 		model.addAttribute("form", form);
 		return "courseContent";
 	}
-	
-	
-	
+
+
+
 	@GetMapping("/ctl/content/getVideo/{id}")
 	public void getVideo(HttpServletResponse response, @PathVariable("id") long id) throws Exception {
 
 		Blob blb=service.getVideoById(id);
-		
+
 		byte[] bytes = blb.getBytes(1, (int) blb.length());
 		InputStream inputStream = new ByteArrayInputStream(bytes);
 		IOUtils.copy(inputStream, response.getOutputStream());
 	}
-	
+
 	@GetMapping("/ctl/content/getMaterial/{id}")
 	public void getMaterial(HttpServletResponse response, @PathVariable("id") long id) throws Exception {
 
 		Blob blb=service.getMaterialById(id);
-		
+
 		byte[] bytes = blb.getBytes(1, (int) blb.length());
 		InputStream inputStream = new ByteArrayInputStream(bytes);
 		IOUtils.copy(inputStream, response.getOutputStream());
