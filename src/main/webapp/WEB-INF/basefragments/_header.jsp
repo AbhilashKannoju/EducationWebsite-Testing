@@ -90,7 +90,7 @@
 							<li class="nav-item linkSize"><a class="nav-link link-light"
 								href="<c:url value="/home/login/dashboard"/>">Dashboard</a></li>
 							<li class="nav-item linkSize"><a class="nav-link link-light"
-								href="<c:url value="/home/login/dashboard/course/searches"/>">View Course</a></li>
+								href="<c:url value="/home/login/dashboard/course/search"/>">View Course</a></li>
 							<li class="nav-item linkSize"><a class="nav-link link-light"
 								href="<c:url value="/home/login/dashboard/course"/>">Add Course</a></li>
 							<li class="nav-item linkSize"><a class="nav-link link-light"
