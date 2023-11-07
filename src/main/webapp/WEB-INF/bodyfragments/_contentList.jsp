@@ -12,7 +12,7 @@
 
 <c:url var="addUrl" value="/home/login/dashboard/course/content" />
 
-<c:url var="addSearch" value="/home/login/dashboard/course/contents/search" />
+<c:url var="addSearch" value="/home/login/dashboard/course/content/search" />
 
 <c:url var="editUrl" value="/home/login/dashboard/course/content?id=" />
 
@@ -139,7 +139,7 @@
 						</c:forEach>
 						<li class="page-item"><input type="submit" name="operation"
 							class="page-link"
-							<c:if test="${total == pagenosize  || listsize < pageSize   }">disabled="enabled"</c:if>
+							<c:if test="${total == pagenosize  || listsize < pageSize   }">disabled="disabled"</c:if>
 							value="Next"></li>
 					</ul>
 				</nav>
