@@ -30,7 +30,7 @@ public class HelpDeskDAOImpl implements HelpDeskDAOInt {
 	public long add(HelpDeskDTO dto) {
 		log.info("HelpDeskDAOImpl Add method Start");
 		Session session = entityManager.unwrap(Session.class);
-	;
+		long pk = (long) session.save(dto);
 		log.info("HelpDeskDAOImpl Add method End");
 		return pk;
 	}
@@ -103,7 +103,7 @@ public class HelpDeskDAOImpl implements HelpDeskDAOInt {
 
 			/*
 			 * if (dto.getUserId() > 0) { hql.append("and u.userId = " + dto.getUserId()); }
-			 * 
+			 *
 			 * if (dto.getName() != null && dto.getName().length() > 0) {
 			 * hql.append("and u.name like '%" + dto.getName() + "%'"); }
 			 */
@@ -120,5 +120,5 @@ public class HelpDeskDAOImpl implements HelpDeskDAOInt {
 		return list;
 	}
 
-	
+
 }
