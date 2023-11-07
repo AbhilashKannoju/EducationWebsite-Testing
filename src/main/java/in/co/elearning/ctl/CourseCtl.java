@@ -37,14 +37,14 @@ public class CourseCtl extends BaseCtl {
 
 	@Autowired
 	private CourseServiceInt service;
-	
+
 	@ModelAttribute
 	public void preload(Model model) {
 	}
 
 	@GetMapping("/home/login/dashboard/course")
 	public String display(@RequestParam(required = false) Long id, Long pId, @ModelAttribute("form") CourseForm form,
-			HttpSession session, Model model) {
+						  HttpSession session, Model model) {
 		if (form.getId() > 0) {
 			CourseDTO bean = service.findBypk(id);
 			form.populate(bean);
@@ -54,12 +54,12 @@ public class CourseCtl extends BaseCtl {
 
 	@PostMapping("/home/login/dashboard/course")
 	public String submit(@RequestParam("image") MultipartFile file,@Valid @ModelAttribute("form") CourseForm form, BindingResult bindingResult,
-			HttpSession session, Model model) {
+						 HttpSession session, Model model) {
 
 		if (OP_RESET.equalsIgnoreCase(form.getOperation())) {
 			return "redirect:/home/login/dashboard/course";
 		}
-		
+
 		try {
 			if (OP_SAVE.equalsIgnoreCase(form.getOperation())) {
 
@@ -97,7 +97,7 @@ public class CourseCtl extends BaseCtl {
 
 	@RequestMapping(value = "/home/login/dashboard/course/search", method = { RequestMethod.GET, RequestMethod.POST })
 	public String searchList(@ModelAttribute("form") CourseForm form,
-			@RequestParam(required = false) String operation, Long vid, HttpSession session, Model model) {
+							 @RequestParam(required = false) String operation, Long vid, HttpSession session, Model model) {
 
 		if (OP_RESET.equalsIgnoreCase(operation)) {
 			return "redirect:/home/login/dashboard/course/search";
@@ -118,16 +118,6 @@ public class CourseCtl extends BaseCtl {
 		pageSize = (pageSize < 1) ? 10 : pageSize;
 
 		if (OP_DELETE.equals(operation)) {
-			
-
-			form.setPageNo(pageNo);
-			form.setPageSize(pageSize);
-			model.addAttribute("pageNo", pageNo);
-			model.addAttribute("pageSize", pageSize);
-			model.addAttribute("listsize", listsize);
-			model.addAttribute("total", total);
-			model.addAttribute("pagenosize", pageNoPageSize);
-			model.addAttribute("form", form);
 			pageNo = 1;
 			if (form.getIds() != null) {
 				for (long id : form.getIds()) {
@@ -143,7 +133,7 @@ public class CourseCtl extends BaseCtl {
 		CourseDTO dto = (CourseDTO) form.getDTO();
 
 		UserDTO uDto = (UserDTO) session.getAttribute("user");
-		
+
 
 		List<CourseDTO> list = service.search(dto, pageNo, pageSize);
 		List<CourseDTO> totallist = service.search(dto);
@@ -167,10 +157,10 @@ public class CourseCtl extends BaseCtl {
 		model.addAttribute("form", form);
 		return "courseList";
 	}
-	
+
 	@RequestMapping(value = "/home/login/student/course/search", method = { RequestMethod.GET, RequestMethod.POST })
 	public String searchUserList(@ModelAttribute("form") CourseForm form,
-			@RequestParam(required = false) String operation, Long vid, HttpSession session, Model model) {
+								 @RequestParam(required = false) String operation, Long vid, HttpSession session, Model model) {
 
 		if (OP_RESET.equalsIgnoreCase(operation)) {
 			return "redirect:/home/login/student/course/search";
@@ -183,11 +173,11 @@ public class CourseCtl extends BaseCtl {
 			pageNo++;
 		} else if (OP_PREVIOUS.equals(operation)) {
 			pageNo--;
-		} 
+		}
 		pageNo = (pageNo < 1) ? 1 : pageNo;
 		pageSize = (pageSize < 1) ? 10 : pageSize;
 
-		
+
 		CourseDTO dto = (CourseDTO) form.getDTO();
 
 
@@ -213,13 +203,13 @@ public class CourseCtl extends BaseCtl {
 		model.addAttribute("form", form);
 		return "userCourse";
 	}
-	
-	
+
+
 	@GetMapping("/ctl/course/getImage/{id}")
 	public void getStudentPhoto(HttpServletResponse response, @PathVariable("id") long id) throws Exception {
 
 		Blob blb=service.getImageById(id);
-		
+
 		byte[] bytes = blb.getBytes(1, (int) blb.length());
 		InputStream inputStream = new ByteArrayInputStream(bytes);
 		IOUtils.copy(inputStream, response.getOutputStream());
