@@ -34,16 +34,16 @@ public class LoginCtl extends BaseCtl {
 
 	private Logger log = Logger.getLogger(LoginCtl.class.getName());
 
-	protected  String OP_SIGNIN = "SignIn";
-	protected String OP_SIGNUP = "SignUp";
-	protected  String OP_LOGOUT = "Logout";
+	protected static final String OP_SIGNIN = "SignIn";
+	protected static final String OP_SIGNUP = "SignUp";
+	protected static final String OP_LOGOUT = "Logout";
 
 	@Autowired
 	private UserServiceInt service;
 
 	@GetMapping("/home/login")
 	public String display(@ModelAttribute("form") LoginForm form, @RequestParam(required = false) Long iId,
-			HttpSession session, Model model) {
+						  HttpSession session, Model model) {
 		log.info("LoginCtl login display method start");
 		if (session.getAttribute("user") != null) {
 			session.invalidate();
@@ -68,7 +68,7 @@ public class LoginCtl extends BaseCtl {
 
 	@PostMapping("/home/login")
 	public String submit(@RequestParam String operation, HttpSession session,
-			@Valid @ModelAttribute("form") LoginForm form, BindingResult result, Model model) {
+						 @Valid @ModelAttribute("form") LoginForm form, BindingResult result, Model model) {
 		log.info("LoginCtl login submit method start");
 		System.out.println("In dopost  LoginCtl");
 
@@ -107,7 +107,7 @@ public class LoginCtl extends BaseCtl {
 
 	@PostMapping("/home/signUp")
 	public String submit(@RequestParam String operation, @Valid @ModelAttribute("form") UserRegistrationForm form,
-			BindingResult bindingResult, Model model, HttpServletRequest request) {
+						 BindingResult bindingResult, Model model, HttpServletRequest request) {
 
 		log.info("LoginCtl signUp submit method start");
 
@@ -147,7 +147,7 @@ public class LoginCtl extends BaseCtl {
 
 	@PostMapping("/home/facilitator")
 	public String facilitator(@RequestParam String operation, @Valid @ModelAttribute("form") FacilitatorForm form,
-			BindingResult bindingResult, Model model, HttpServletRequest request) {
+							  BindingResult bindingResult, Model model, HttpServletRequest request) {
 
 		log.info("LoginCtl signUp submit method start");
 
@@ -188,7 +188,7 @@ public class LoginCtl extends BaseCtl {
 
 	@RequestMapping(value = "/home/login/profile", method = RequestMethod.POST)
 	public String submitProfile(HttpSession session, @ModelAttribute("form") @Valid MyProfileForm form,
-			BindingResult bindingResult, @RequestParam(required = false) String operation, Model model) {
+								BindingResult bindingResult, @RequestParam(required = false) String operation, Model model) {
 
 		if (OP_RESET.equalsIgnoreCase(operation)) {
 			return "redirect:/home/login/profile";
@@ -223,12 +223,24 @@ public class LoginCtl extends BaseCtl {
 
 	@RequestMapping(value = "/home/login/changepassword", method = RequestMethod.POST)
 	public String submitChangePassword(HttpSession session, @ModelAttribute("form") @Valid ChangePasswordForm form,
-			BindingResult bindingResult, Model model) {
+									   BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			return "changePassword";
 		}
-		
+		if (form.getNewPassword().equalsIgnoreCase(form.getConfirmPassword())) {
+
+			UserDTO dto = (UserDTO) session.getAttribute("user");
+			dto = service.findBypk(dto.getId());
+
+			if (service.changePassword(dto.getId(), form.getOldPassword(), form.getNewPassword())) {
+				model.addAttribute("success", "Password changed Successfully");
+			} else {
+				model.addAttribute("error", "Old Passowors Does not Matched");
+			}
+		} else {
+			model.addAttribute("error", "New Password and confirm password does not matched");
+		}
 		return "changePassword";
 	}
 
@@ -243,7 +255,7 @@ public class LoginCtl extends BaseCtl {
 
 	@RequestMapping(value = "/home/login/forgetPassword", method = RequestMethod.POST)
 	public String display(@ModelAttribute("form") @Valid ForgetPasswordForm form, BindingResult bindingResult,
-			Model model) {
+						  Model model) {
 
 		if (bindingResult.hasErrors()) {
 			return "forgetPassword";
