@@ -30,8 +30,8 @@
 						<label for="inputEmail4" class="form-label">First Name</label>
 						<sf:input path="${status.expression}"
 							placeholder="Enter First Name" class="form-control" />
-						<font color="red" style="font-size: 13px">
-							</font>
+						<font color="red" style="font-size: 13px"><sf:errors
+								path="${status.expression}" /></font>
 					</s:bind>
 				</div>
 
@@ -40,7 +40,8 @@
 						<label for="inputEmail4" class="form-label">Last Name</label>
 						<sf:input path="${status.expression}"
 							placeholder="Enter Last Name" class="form-control" />
-						<font color="red" style="font-size: 13px"></font>
+						<font color="red" style="font-size: 13px"><sf:errors
+								path="${status.expression}" /></font>
 					</s:bind>
 				</div>
 
@@ -49,7 +50,8 @@
 						<label for="inputEmail4" class="form-label">Login Id</label>
 						<sf:input path="${status.expression}"
 							placeholder="Enter Login Id" class="form-control" />
-						<font color="red" style="font-size: 13px"></font>
+						<font color="red" style="font-size: 13px"><sf:errors
+								path="${status.expression}" /></font>
 					</s:bind>
 				</div>
 
@@ -58,7 +60,8 @@
 						<label for="inputEmail4" class="form-label">Email</label>
 						<sf:input path="${status.expression}" placeholder="Enter Email"
 							class="form-control" />
-						<font color="red" style="font-size: 13px"></font>
+						<font color="red" style="font-size: 13px"><sf:errors
+								path="${status.expression}" /></font>
 					</s:bind>
 				</div>
 
@@ -67,7 +70,8 @@
 						<label for="inputEmail4" class="form-label">Password</label>
 						<sf:input type="password" path="${status.expression}"
 							placeholder="Enter Password" class="form-control" />
-						<font color="red" style="font-size: 13px"></font>
+						<font color="red" style="font-size: 13px"><sf:errors
+								path="${status.expression}" /></font>
 					</s:bind>
 				</div>
 
@@ -77,7 +81,8 @@
 							Password</label>
 						<sf:input type="password" path="${status.expression}"
 							placeholder="Enter Confirm Password" class="form-control" />
-						<font color="red" style="font-size: 13px"></font>
+						<font color="red" style="font-size: 13px"><sf:errors
+								path="${status.expression}" /></font>
 					</s:bind>
 				</div>
 
@@ -86,7 +91,8 @@
 						<label for="inputEmail4" class="form-label">Contact No</label>
 						<sf:input path="${status.expression}"
 							placeholder="Enter Contact No" class="form-control" />
-						<font color="red" style="font-size: 13px"></font>
+						<font color="red" style="font-size: 13px"><sf:errors
+								path="${status.expression}" /></font>
 					</s:bind>
 				</div>
 
@@ -98,7 +104,8 @@
 									<sf:option value="" label="Select" />
 									<sf:options   items="${gender}" />
 								</sf:select>
-						<font color="red" style="font-size: 13px"></font>
+						<font color="red" style="font-size: 13px"><sf:errors
+								path="${status.expression}" /></font>
 					</s:bind>
 				</div>
 				
