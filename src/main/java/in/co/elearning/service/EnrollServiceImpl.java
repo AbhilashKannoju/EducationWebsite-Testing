@@ -31,7 +31,7 @@ public class EnrollServiceImpl implements EnrollServiceInt {
 	@Transactional
 	public long add(EnrollDTO dto) throws DuplicateRecordException {
 		log.info("EnrollServiceImpl Add method start");
-		
+
 		long pk = dao.add(dto);
 		log.info("EnrollServiceImpl Add method end");
 		return pk;
@@ -68,13 +68,12 @@ public class EnrollServiceImpl implements EnrollServiceInt {
 	@Transactional
 	public void update(EnrollDTO dto) throws DuplicateRecordException {
 		log.info("EnrollServiceImpl update method start");
-				dao.update(dto);
+		dao.update(dto);
 		log.info("EnrollServiceImpl update method end");
 	}
 
 	@Override
 	@Transactional
-	@Autowired
 	public List<EnrollDTO> list() {
 		log.info("EnrollServiceImpl list method start");
 		List<EnrollDTO> list = dao.list();
@@ -84,7 +83,6 @@ public class EnrollServiceImpl implements EnrollServiceInt {
 
 	@Override
 	@Transactional
-	@Autowired
 	public List<EnrollDTO> list(int pageNo, int pageSize) {
 		log.info("EnrollServiceImpl list method start");
 		List<EnrollDTO> list = dao.list(pageNo, pageSize);
@@ -112,12 +110,12 @@ public class EnrollServiceImpl implements EnrollServiceInt {
 
 	@Override
 	@Transactional
-	public EnrollDTO findidatcourses(long courseId, long userId) {
+	public EnrollDTO findByCourseIdAndUserId(long courseId, long userId) {
 		// TODO Auto-generated method stub
 		return dao.findByCourseIdAndUserId(courseId, userId);
 	}
-	
-	
+
+
 
 
 }

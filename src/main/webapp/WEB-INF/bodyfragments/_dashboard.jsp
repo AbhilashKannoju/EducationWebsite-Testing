@@ -14,7 +14,7 @@
 <div class="row">
 <div class="col">
 <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-  <a href="<c: value="/home/login/dashboard/course/search"/>" class="link-light"><div class="card-body">
+  <a href="<c:url value="/home/login/dashboard/course/search"/>" class="link-light"><div class="card-body">
     <h2 class="card-title">View Course</h2>
   </div>
   </a>
@@ -22,14 +22,14 @@
 </div>
 <div class="col">
 <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-   <a href="<c: value="/home/login/dashboard/course"/>" class="link-light"><div class="card-body">
+   <a href="<c:url value="/home/login/dashboard/course"/>" class="link-light"><div class="card-body">
     <h2 class="card-title">Add Course</h2>
   </div></a>
   </div>
 </div>
 <div class="col">
 <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
- <a href="<c: value="/home/login/helpDesk/search"/>" class="link-light"> <div class="card-body">
+ <a href="<c:url value="/home/login/helpDesk/search"/>" class="link-light"> <div class="card-body">
     <h2 class="card-title">View Query</h2>
   </div></a>
   </div>
