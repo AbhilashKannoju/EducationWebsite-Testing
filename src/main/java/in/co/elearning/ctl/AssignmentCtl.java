@@ -52,7 +52,7 @@ public class AssignmentCtl {
 
 	@GetMapping("/assignmentlist")
 	public String list(@ModelAttribute("form") AssignmentForm form, HttpSession session, Model model) {
-        
+
 		List<AssignmentDTO> list = service.list();
 		model.addAttribute("list", list);
 		return "assignmentlist";
@@ -60,11 +60,14 @@ public class AssignmentCtl {
 
 	@PostMapping("/AddAssignment")
 	public String Add(@Valid @ModelAttribute("form") AssignmentForm form,@RequestParam("afile") MultipartFile file, BindingResult bindingResult,
-			HttpSession session, Model model, HttpServletRequest request) {
-		
+					  HttpSession session, Model model, HttpServletRequest request) {
+
 		AssignmentDTO bean = (AssignmentDTO) form.getDTO();
 		try {
-			
+			bean.setAfile(file.getBytes());
+			bean.setStatus("Pending");
+			service.add(bean);
+			model.addAttribute("success", "Assignment Added Successfully..");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -72,58 +75,58 @@ public class AssignmentCtl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 		return "assignment";
 	}
 
 	@PostMapping("/submitAssignment")
 	public String SubmitAssignment(@ModelAttribute("form") AssignmentForm form, @RequestParam("ansAssignment") MultipartFile file,  BindingResult bindingResult,
-			HttpSession session, Model model, HttpServletRequest request) {
-		
+								   HttpSession session, Model model, HttpServletRequest request) {
+
 		AssignmentDTO bean = (AssignmentDTO)form.getDTO();
 		System.out.println("Bean ID..............: "+bean.getId());
 
-			AssignmentDTO ebean = service.findBypk(bean.getId());
-			System.out.println("ebean ID..............: "+ebean);
-			try {
-				ebean.setAnsAssignment(file.getBytes());
-				ebean.setStatus("Submitted");
-				//bean.setAfile(afile.getBytes());
-				System.out.println("bean: "+ebean.toString());
-				service.submitAssignment(ebean);
-				
-				model.addAttribute("success", "Assignment Submited Successfully..");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (DuplicateRecordException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-		
-	
+		AssignmentDTO ebean = service.findBypk(bean.getId());
+		System.out.println("ebean ID..............: "+ebean);
+		try {
+			ebean.setAnsAssignment(file.getBytes());
+			ebean.setStatus("Submitted");
+			//bean.setAfile(afile.getBytes());
+			System.out.println("bean: "+ebean.toString());
+			service.submitAssignment(ebean);
+
+			model.addAttribute("success", "Assignment Submited Successfully..");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DuplicateRecordException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
 		return "redirect:/assignmentlist";
 	}
-	
+
 	@GetMapping("getAfile/{id}")
 	public void getNewsImage(HttpServletResponse response, @PathVariable("id") long id) throws Exception {
-			
-		Blob blb= service.getAfileById(id);				
+
+		Blob blb= service.getAfileById(id);
 		byte[] bytes = blb.getBytes(1, (int) blb.length());
 		InputStream inputStream = new ByteArrayInputStream(bytes);
 		IOUtils.copy(inputStream, response.getOutputStream());
-	
+
 	}
-	
+
 	@GetMapping("getSubmitfile/{id}")
 	public void getSubmitfile(HttpServletResponse response, @PathVariable("id") long id) throws Exception {
-			
-		Blob blb= service.getSubmitfileById(id);				
+
+		Blob blb= service.getSubmitfileById(id);
 		byte[] bytes = blb.getBytes(1, (int) blb.length());
 		InputStream inputStream = new ByteArrayInputStream(bytes);
 		IOUtils.copy(inputStream, response.getOutputStream());
-	
+
 	}
 
 }
