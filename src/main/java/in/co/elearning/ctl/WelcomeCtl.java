@@ -24,12 +24,7 @@ public class WelcomeCtl {
 	public String dashboard(Model model) {
 		return "dashboard";
 	}
-	
-	@GetMapping("/registration")
-	public String dashboard(Model model) {
-		return "registration";
-	}
-	
-	
+
+
 
 }

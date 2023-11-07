@@ -35,7 +35,13 @@ public class EnrollDAOImpl implements EnrollDAOInt {
 		return pk;
 	}
 
-	
+	@Override
+	public void delete(EnrollDTO dto) {
+		log.info("EnrollDAOImpl Delete method Start");
+		entityManager.remove(entityManager.contains(dto) ? dto : entityManager.merge(dto));
+		log.info("EnrollDAOImpl Delete method End");
+
+	}
 
 	@Override
 	public EnrollDTO findBypk(long pk) {
@@ -56,7 +62,7 @@ public class EnrollDAOImpl implements EnrollDAOInt {
 		log.info("EnrollDAOImpl FindByLogin method End");
 		return dto;
 	}
-	
+
 	@Override
 	public EnrollDTO findByCourseIdAndUserId(long courseId, long userId) {
 		log.info("EnrollDAOImpl findByCourseIdAndUserId method Start");
@@ -111,7 +117,7 @@ public class EnrollDAOImpl implements EnrollDAOInt {
 				hql.append("and u.userId = " + dto.getUserId());
 			}
 
-			
+
 		}
 		Query<EnrollDTO> query = session.createQuery(hql.toString(), EnrollDTO.class);
 		if (pageNo > 0) {
@@ -124,6 +130,6 @@ public class EnrollDAOImpl implements EnrollDAOInt {
 		return list;
 	}
 
-	
+
 
 }

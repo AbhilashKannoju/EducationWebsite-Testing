@@ -39,14 +39,14 @@ public class HelpDeskCtl extends BaseCtl {
 
 	@Autowired
 	private HelpDeskServiceInt service;
-	
+
 	@ModelAttribute
 	public void preload(Model model) {
 	}
 
 	@GetMapping("/home/login/helpDesk")
 	public String display(@RequestParam(required = false) Long id, Long pId, @ModelAttribute("form") HelpDeskForm form,
-			HttpSession session, Model model) {
+						  HttpSession session, Model model) {
 		if (form.getId() > 0) {
 			HelpDeskDTO bean = service.findBypk(id);
 			form.populate(bean);
@@ -56,16 +56,14 @@ public class HelpDeskCtl extends BaseCtl {
 
 	@PostMapping("/home/login/helpDesk")
 	public String submit(@Valid @ModelAttribute("form") HelpDeskForm form, BindingResult bindingResult,
-			HttpSession session, Model model,HttpServletRequest request) {
+						 HttpSession session, Model model,HttpServletRequest request) {
 
-		String res = "reset";
-		String sav = "save";
-		if (res.equalsIgnoreCase(form.getOperation())) {
+		if (OP_RESET.equalsIgnoreCase(form.getOperation())) {
 			return "redirect:/home/login/helpDesk";
 		}
-		
+
 		try {
-			if (sav.equalsIgnoreCase(form.getOperation())) {
+			if (OP_SAVE.equalsIgnoreCase(form.getOperation())) {
 
 				if (bindingResult.hasErrors()) {
 					return "helpDesk";
@@ -83,13 +81,13 @@ public class HelpDeskCtl extends BaseCtl {
 		} catch (DuplicateRecordException e) {
 			model.addAttribute("error", e.getMessage());
 			return "helpDesk";
-		} 
+		}
 		return "";
 	}
 
 	@RequestMapping(value = "/home/login/helpDesk/search", method = { RequestMethod.GET, RequestMethod.POST })
 	public String searchList(@ModelAttribute("form") HelpDeskForm form,
-			@RequestParam(required = false) String operation, Long vid, HttpSession session, Model model) {
+							 @RequestParam(required = false) String operation, Long vid, HttpSession session, Model model) {
 
 		if (OP_RESET.equalsIgnoreCase(operation)) {
 			return "redirect:/home/login/helpDesk/search";
@@ -125,7 +123,7 @@ public class HelpDeskCtl extends BaseCtl {
 		HelpDeskDTO dto = (HelpDeskDTO) form.getDTO();
 
 		UserDTO uDto = (UserDTO) session.getAttribute("user");
-		
+
 
 		List<HelpDeskDTO> list = service.search(dto, pageNo, pageSize);
 		List<HelpDeskDTO> totallist = service.search(dto);
@@ -149,8 +147,8 @@ public class HelpDeskCtl extends BaseCtl {
 		model.addAttribute("form", form);
 		return "helpDeskList";
 	}
-	
-	
-	
+
+
+
 
 }
