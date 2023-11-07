@@ -103,7 +103,7 @@ public class ContentDAOImpl implements ContentDAOInt {
 
 			/*
 			 * if (dto.getUserId() > 0) { hql.append("and u.userId = " + dto.getUserId()); }
-			 * 
+			 *
 			 * if (dto.getName() != null && dto.getName().length() > 0) {
 			 * hql.append("and u.name like '%" + dto.getName() + "%'"); }
 			 */
@@ -129,13 +129,13 @@ public class ContentDAOImpl implements ContentDAOInt {
 		Blob bBlob = new SerialBlob(blob);
 		return bBlob;
 	}
-	
+
 	@Override
 	public Blob getMaterialById(long id) throws SerialException, SQLException {
 		Session session = entityManager.unwrap(Session.class);
 		ContentDTO person = (ContentDTO) session.get(ContentDTO.class, id);
 		byte[] blob = person.getMaterial();
-		
+		Blob bBlob = new SerialBlob(blob);
 		return bBlob;
 	}
 

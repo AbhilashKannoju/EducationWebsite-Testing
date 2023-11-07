@@ -18,10 +18,10 @@ public class ContentForm extends BaseForm {
 
 	@NotEmpty(message = "Title is required")
 	private String title;
-	
+
 	private MultipartFile video;
 	private MultipartFile material;
-	
+
 
 	@Override
 	public BaseDTO getDTO() {
@@ -45,16 +45,5 @@ public class ContentForm extends BaseForm {
 		createdDateTime=bean.getCreatedDatetime();
 		modifiedDateTime=bean.getModifiedDatetime();
 	}
-	@Override
-	public void mulmtimediabean(BaseDTO bdto) {
-		ContentDTO bean=(ContentDTO) bdto;
-		id=bean.getId();
-		title=bean.getTitle();
-		createdBy=bean.getCreatedBy();
-		modifiedBy=bean.getModifiedBy();
-		createdDateTime=bean.getCreatedDatetime();
-		modifiedDateTime=bean.getModifiedDatetime();
-	}
-
 
 }
